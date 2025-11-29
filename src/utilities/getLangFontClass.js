@@ -1,9 +1,9 @@
-// get the language font class based on current i18n language
-import i18n from "@/i18n";
+// get the language font class based on current i18next language
+import i18next from "@/i18n";
 
 // Returns font class, direction, and textAlign based on language
 export default function getLangProps(styles) {
-  const lang = i18n.language;
+  const lang = i18next.language;
   let fontClass = "";
   let direction = "ltr";
   let textAlign = "left";

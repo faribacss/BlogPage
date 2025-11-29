@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 
 // i18n (initialize before app)
-import "./i18n";
+import "@/i18n";
 
 // components
 import App from "@/App.jsx";

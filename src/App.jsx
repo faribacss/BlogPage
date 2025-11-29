@@ -8,7 +8,7 @@ import ChangeLang from "@/components/language/ChangeLang";
 import ToLogin from "@/pages/login/index.js";
 import ToSignUp from "@/pages/signup/index.js";
 import WelcomePage from "@/pages/panel/index.js";
-import { PivateRout } from "@/pages/panel/PrivateRoute.jsx";
+import { PrivateRoute } from "@/pages/panel/PrivateRoute.jsx";
 import Home from "@/pages/home";
 import Panel from "@/pages/panel";
 import PostId from "@/pages/postId";
@@ -34,9 +34,9 @@ export default function App() {
             <Route
               path="/welcome"
               element={
-                <PivateRout>
+                <PrivateRoute>
                   <WelcomePage />
-                </PivateRout>
+                </PrivateRoute>
               }
             />
             <Route path="/panel" element={<Panel />} />

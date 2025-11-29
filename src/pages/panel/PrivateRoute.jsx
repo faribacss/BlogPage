@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { SaveInfoContext } from "@/context/SaveInfo.jsx";
 
 // Protected Route Component
-export const PivateRout = ({ children }) => {
+export const PrivateRoute = ({ children }) => {
   const { user } = useContext(SaveInfoContext);
   if (!user) {
     return <Navigate to="/" replace />;

@@ -1,9 +1,9 @@
 // i18n.js
-import i18n from "@/i18n.js";
+import i18next from "@/i18n";
 
 export function getToastFont() {
-  const isRtl = i18n.dir() === "rtl";
-  const lang = (i18n.language || "").split("-")[0];
+  const isRtl = i18next.dir() === "rtl";
+  const lang = (i18next.language || "").split("-")[0];
   let fontFamily;
   if (lang === "fa") {
     fontFamily = "Lalezar";
