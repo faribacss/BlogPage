@@ -1,0 +1,24 @@
+.containerFluid {
+  scroll-behavior: smooth;
+  height: 100vh;
+}
+
+.tabList{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Persian Fonts */
+.faFont .tabs, .faFont textarea, .faFont input, .faFont button{
+  font-family: "Yekan", sans-serif !important;
+}
+/* English Fonts */
+.enFont .tabs, .enFont textarea, .enFont input, .enFont button{
+  font-family: "Geologica", sans-serif !important;
+}
+/* Korean Fonts */
+.koFont .tabs, .koFont textarea, .koFont input, .koFont button {
+  font-family: "JejuMyeongjo", sans-serif !important;
+}
