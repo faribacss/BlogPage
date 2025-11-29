@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import ChangeLang from "@/components/language/ChangeLang";
 import ToLogin from "@/pages/login/index.js";
 import ToSignUp from "@/pages/signup/index.js";
-import WelcomePage from "@/pages/panel/index.js";
 import { PrivateRoute } from "@/pages/panel/PrivateRoute.jsx";
 import Home from "@/pages/home";
 import Panel from "@/pages/panel";
@@ -32,18 +31,45 @@ export default function App() {
             <Route path="/" element={<ToLogin />} />
             <Route path="/signup" element={<ToSignUp />} />
             <Route
-              path="/welcome"
+              path="/panel"
               element={
                 <PrivateRoute>
-                  <WelcomePage />
+                  <Panel />
                 </PrivateRoute>
               }
             />
-            <Route path="/panel" element={<Panel />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/post/:documentId" element={<PostId />} />
-            <Route path="/create-post" element={<CreatePost />} />
-            <Route path="/edit-post/:documentId" element={<EditPost />} />
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/post/:documentId"
+              element={
+                <PrivateRoute>
+                  <PostId />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/create-post"
+              element={
+                <PrivateRoute>
+                  <CreatePost />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/edit-post/:documentId"
+              element={
+                <PrivateRoute>
+                  <EditPost />
+                </PrivateRoute>
+              }
+            />
           </Routes>
           <ToastContainer />
           <Footer />
