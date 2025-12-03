@@ -104,7 +104,7 @@ function ToSignUp() {
 
       // Navigate after short delay to show success state
       setTimeout(() => {
-        navigate("/welcome");
+        navigate("/panel");
       }, 1500);
 
       return user;

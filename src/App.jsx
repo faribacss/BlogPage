@@ -20,61 +20,68 @@ import EditPost from "@/pages/editPost/index.jsx";
 import Navbar from "@/components/Navbar/index.jsx";
 import Footer from "@/components/Footer/index.jsx";
 
+// style
+import "@/App.css";
+
 export default function App() {
   return (
-    <SaveInfoProvider>
-      <LanguageProvider>
-        <ChangeLang />
-        <Navbar />
-        <LanguageRoot>
-          <Routes>
-            <Route path="/" element={<ToLogin />} />
-            <Route path="/signup" element={<ToSignUp />} />
-            <Route
-              path="/panel"
-              element={
-                <PrivateRoute>
-                  <Panel />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/home"
-              element={
-                <PrivateRoute>
-                  <Home />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/post/:documentId"
-              element={
-                <PrivateRoute>
-                  <PostId />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/create-post"
-              element={
-                <PrivateRoute>
-                  <CreatePost />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/edit-post/:documentId"
-              element={
-                <PrivateRoute>
-                  <EditPost />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-          <ToastContainer />
+    <div className="mainContainer">
+      <SaveInfoProvider>
+        <LanguageProvider>
+          <ChangeLang />
+          <div className="content">
+            <Navbar />
+            <LanguageRoot>
+              <Routes>
+                <Route path="/" element={<ToLogin />} />
+                <Route path="/signup" element={<ToSignUp />} />
+                <Route
+                  path="/panel"
+                  element={
+                    <PrivateRoute>
+                      <Panel />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/home"
+                  element={
+                    <PrivateRoute>
+                      <Home />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/post/:documentId"
+                  element={
+                    <PrivateRoute>
+                      <PostId />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/create-post"
+                  element={
+                    <PrivateRoute>
+                      <CreatePost />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/edit-post/:documentId"
+                  element={
+                    <PrivateRoute>
+                      <EditPost />
+                    </PrivateRoute>
+                  }
+                />
+              </Routes>
+              <ToastContainer />
+            </LanguageRoot>
+          </div>
           <Footer />
-        </LanguageRoot>
-      </LanguageProvider>
-    </SaveInfoProvider>
+        </LanguageProvider>
+      </SaveInfoProvider>
+    </div>
   );
 }

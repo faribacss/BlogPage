@@ -1,4 +1,5 @@
-// src/services/posts.js
+// library
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 const API_BASE_URL = "https://strapi.arvanschool.ir/api";
@@ -17,53 +18,82 @@ function getAuthHeaders() {
 }
 
 // Get All Posts
-
-export async function getPosts() {
-  const res = await axios.get(`${API_BASE_URL}/posts`, {
-    headers: getAuthHeaders(),
+export function GetAllPost() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () =>
+      axios
+        .get(`${API_BASE_URL}/posts`, {
+          headers: getAuthHeaders(),
+        })
+        .then((res) => res.data.data),
   });
-  return res.data.data;
+  return { data, isLoading, error };
 }
 
-// Get a Post By ID
-
-export async function getPost(documentId) {
-  const res = await axios.get(`${API_BASE_URL}/posts/${documentId}`, {
-    headers: getAuthHeaders(),
+// Get Post By ID
+export function GetPostById(documentId) {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["post", documentId],
+    queryFn: () =>
+      axios
+        .get(`${API_BASE_URL}/posts/${documentId}`, {
+          headers: getAuthHeaders(),
+        })
+        .then((res) => res.data.data),
   });
-  return res.data.data;
+  return { data, isLoading, error };
 }
 
 // Create a Post
-
-export async function createPost(postData) {
-  const res = await axios.post(
-    `${API_BASE_URL}/posts`,
-    { data: postData },
-    {
-      headers: getAuthHeaders(),
-    }
-  );
-  return res.data.data;
+export default function CreateOnePost() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (postData) =>
+      axios
+        .post(
+          `${API_BASE_URL}/posts`,
+          { data: postData },
+          { headers: getAuthHeaders() }
+        )
+        .then((res) => res.data.data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["posts"]);
+    },
+    onError: (error) => {
+      console.error("Error creating post:", error);
+    },
+  });
 }
 
-// Edite (update) a Post
-
-export async function updatePost(documentId, postData) {
-  const res = await axios.put(
-    `${API_BASE_URL}/posts/${documentId}`,
-    { data: postData },
-    {
-      headers: getAuthHeaders(),
-    }
-  );
-  return res.data.data;
+// Edit (update) a Post
+export function EditPostById(documentId) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (postData) =>
+      axios
+        .put(
+          `${API_BASE_URL}/posts/${documentId}`,
+          { data: postData },
+          { headers: getAuthHeaders() }
+        )
+        .then((res) => res.data.data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["editPost", documentId] });
+      queryClient.invalidateQueries(["posts"]);
+    },
+    onError: (error) => {
+      console.error("Error updating post:", error);
+    },
+  });
 }
 
 // Delete a Post
-
-export async function deletePost(documentId) {
-  await axios.delete(`${API_BASE_URL}/posts/${documentId}`, {
-    headers: getAuthHeaders(),
+export function DeletePostById(documentId) {
+  return useMutation({
+    mutationFn: () =>
+      axios.delete(`${API_BASE_URL}/posts/${documentId}`, {
+        headers: getAuthHeaders(),
+      }),
   });
 }

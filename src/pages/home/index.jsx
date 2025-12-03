@@ -1,5 +1,4 @@
 // library
-import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { useTranslation } from "react-i18next";
@@ -13,28 +12,11 @@ import "swiper/css/navigation";
 import HomeArticles from "@/components/homeArticles";
 
 // services
-import { getPosts } from "@/services/posts";
+import { GetAllPost } from "@/services/posts";
 
 function Home() {
-  const [posts, setPosts] = useState([]);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const data = await getPosts();
-        if (!cancelled) {
-          setPosts(data);
-        }
-      } catch (error) {
-        console.error("Failed to load posts", error);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const { data: posts, isLoading } = GetAllPost();
 
   return (
     <>
@@ -56,11 +38,23 @@ function Home() {
             }}
             className="swiper"
           >
-            {posts.map((post) => (
-              <SwiperSlide className="swiper-slide" key={post.id}>
-                <HomeArticles {...post} />
-              </SwiperSlide>
-            ))}
+            {isLoading ? (
+              <div
+                style={{
+                  textAlign: "center",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                }}
+              >
+                Loading...
+              </div>
+            ) : (
+              posts.map((post) => (
+                <SwiperSlide className="swiper-slide" key={post.id}>
+                  <HomeArticles {...post} />
+                </SwiperSlide>
+              ))
+            )}
           </Swiper>
         </div>
       </div>

@@ -11,13 +11,6 @@ const saveToStorage = (user, jwt, callback) => {
   if (callback) callback(user, jwt);
 };
 
-// Sign Up
-export const registerUser = async (userData, saveUserData) => {
-  const { data } = await axios.post(`${API_URL}auth/local/register`, userData);
-  saveToStorage(data.user, data.jwt, saveUserData);
-  return data.user;
-};
-
 // Login
 export const login = async (credentials, saveUserData) => {
   const { data } = await axios.post(`${API_URL}auth/local`, credentials);
@@ -25,23 +18,9 @@ export const login = async (credentials, saveUserData) => {
   return data.user;
 };
 
-// Get All Posts
-export const getAllPosts = async () => {
-  const { data } = await axios.get(`${API_URL}posts`);
-  return data;
-};
-
-// Create New Post
-export const createPost = async (postData) => {
-  const jwt = localStorage.getItem("jwt");
-  const { data } = await axios.post(
-    `${API_URL}posts`,
-    { data: postData },
-    {
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-      },
-    }
-  );
-  return data;
+// Sign Up
+export const registerUser = async (userData, saveUserData) => {
+  const { data } = await axios.post(`${API_URL}auth/local/register`, userData);
+  saveToStorage(data.user, data.jwt, saveUserData);
+  return data.user;
 };

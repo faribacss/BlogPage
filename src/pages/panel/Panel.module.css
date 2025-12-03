@@ -3,22 +3,75 @@
   height: 100vh;
 }
 
-.tabList{
+.tabList {
   margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.tabList span {
+  position: unset !important;
+  color: inherit !important;
+}
+
+.tabs {
+  margin: 10px;
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+}
+.activateTab {
+  color: #000 !important;
+  background: linear-gradient(to right, #557b38, #a1c181, #b9ccc0);
+  border-radius: 50px;
+  opacity: 1;
+  box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.postsTabContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.postsContainer {
+  max-width: 1400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 44px;
+  gap: 24px;
+}
+
+.postItem {
+  width: 450px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 720px) {
+  .postItem {
+    width: 80%;
+  }
+}
+
 /* Persian Fonts */
-.faFont .tabs, .faFont textarea, .faFont input, .faFont button{
+.faFont .tabs,
+.faFont textarea,
+.faFont input,
+.faFont button {
   font-family: "Yekan", sans-serif !important;
 }
 /* English Fonts */
-.enFont .tabs, .enFont textarea, .enFont input, .enFont button{
+.enFont .tabs,
+.enFont textarea,
+.enFont input,
+.enFont button {
   font-family: "Geologica", sans-serif !important;
 }
 /* Korean Fonts */
-.koFont .tabs, .koFont textarea, .koFont input, .koFont button {
+.koFont .tabs,
+.koFont textarea,
+.koFont input,
+.koFont button {
   font-family: "JejuMyeongjo", sans-serif !important;
 }

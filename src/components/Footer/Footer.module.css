@@ -96,8 +96,20 @@
   margin-top: 2rem;
   letter-spacing: 0.5px;
 }
+.wave {
+  display: block; 
+  width: 100%;
+  height: auto;
+}
 
 @media screen and (max-width: 720px) {
+  .wave {
+    height: 100px; 
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 992px) {
   .container {
     flex-direction: column;
     text-align: center;

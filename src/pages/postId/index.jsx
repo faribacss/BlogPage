@@ -1,12 +1,12 @@
 // library
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { SaveInfoContext } from "@/context/SaveInfo";
 import { Link, useParams } from "react-router-dom";
 import Aos from "aos";
 import { useTranslation } from "react-i18next";
 
 // services
-import { getPost } from "@/services/posts";
+import { GetPostById } from "@/services/posts";
 
 // style
 import styles from "@/pages/postId/PostId.module.css";
@@ -19,21 +19,8 @@ function PostId() {
 
   const { user } = useContext(SaveInfoContext);
   const { documentId } = useParams();
-  const [post, setPost] = useState();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    if (documentId) {
-      getPost(documentId)
-        .then((data) => {
-          setPost(data);
-          console.log("Received Data:", data);
-        })
-        .catch((error) => {
-          console.error("Error fetching post:", error);
-        });
-    }
-  }, [documentId]);
+  const { data: post, isLoading } = GetPostById(documentId);
 
   const isEdited =
     post &&
@@ -41,11 +28,18 @@ function PostId() {
     post.publishedAt &&
     new Date(post.updatedAt).getTime() !== new Date(post.publishedAt).getTime();
 
-  if (!post) {
+  if (isLoading) {
     return (
-      <>
-        <div style={{ textAlign: "center", marginTop: "20px" }}>Loading...</div>
-      </>
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "20px",
+          fontSize: "20px",
+          fontWeight: "bold",
+        }}
+      >
+        Loading...
+      </div>
     );
   }
 

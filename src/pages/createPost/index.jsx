@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import Aos from "aos";
 
 // services
-import { createPost } from "@/services/posts";
+import CreateOnePost from "@/services/posts";
 
 // utilities
 import showSuccessAlert from "@/utilities/showSuccessAlert";
@@ -28,34 +28,33 @@ import ImageLinkIcon from "@mui/icons-material/AddPhotoAlternate";
 import SendIcon from "@mui/icons-material/Send";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-function CreatePost() {
+export default function CreatePost() {
   Aos.init({ duration: 1000 });
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const createPost = CreateOnePost();
   const [formData, setFormData] = useState({
     content: "",
     url: "",
     modifiedDate: new Date().toISOString(),
   });
-  const navigate = useNavigate();
-
   const formHandler = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
-  const { t } = useTranslation();
   const addPost = (e) => {
     e.preventDefault();
-    createPost(formData)
-      .then((data) => {
-        showSuccessAlert(t("alerts.createPostSuccess"));
-        console.log("Post created:", data);
+    createPost.mutate(formData, {
+      onSuccess: () => {
+        showSuccessAlert(t("alerts.PostCreatedSuccessfully"));
         navigate("/home");
-      })
-      .catch((error) => {
-        showErrorAlert(t("alerts.createPostError"));
-        console.error("Error creating post:", error);
-      });
+      },
+      onError: () => {
+        showErrorAlert(t("alerts.ErrorCreatingPost"));
+      },
+    });
   };
 
   return (
@@ -172,5 +171,3 @@ function CreatePost() {
     </>
   );
 }
-
-export default CreatePost;

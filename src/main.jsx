@@ -2,6 +2,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // i18n (initialize before app)
 import "@/i18n";
@@ -22,16 +23,20 @@ import "react-toastify/dist/ReactToastify.css";
 // Theme
 import { theme } from "@/theme/Theme.jsx";
 
+const client = new QueryClient();
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <HashRouter>
-          <App />
-        </HashRouter>
-        <ToastContainer />
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <QueryClientProvider client={client}>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <HashRouter>
+            <App />
+          </HashRouter>
+          <ToastContainer />
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </QueryClientProvider>
   </StrictMode>
 );

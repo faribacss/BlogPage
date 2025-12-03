@@ -64,7 +64,6 @@ function ToLogin() {
     }
   }, [i18n?.language]);
 
-  // watch fields so we can enable submit only when both are filled
   const [identifierValue, passwordValue] = watch(["identifier", "password"]);
   const allFilled = Boolean(identifierValue && passwordValue);
 

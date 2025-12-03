@@ -59,7 +59,12 @@ export default function Footer() {
     <>
       {jwt ? (
         <>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 260">
+          <svg
+            className={styles.wave}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1240 260"
+            preserveAspectRatio="none"
+          >
             <path
               fill="#2e4039"
               fillOpacity="1"

@@ -15,10 +15,17 @@ import TabPanel from "@mui/lab/TabPanel";
 // utilities
 import getLangProps from "@/utilities/getLangFontClass";
 
+// hooks
+import { GetAllPost } from "@/services/posts";
+
 // components
 import CreatePost from "@/pages/createPost";
+import HomeArticles from "@/components/homeArticles";
+
+// services
 
 export default function Panel() {
+  const { data: posts, isLoading } = GetAllPost();
   const { fontClass: langFontClass } = getLangProps(styles);
   const [value, setValue] = React.useState("1");
   const { t } = useTranslation();
@@ -40,13 +47,13 @@ export default function Panel() {
                 aria-label="lab API tabs example"
               >
                 <Tab
-                  className={styles.tabs}
+                  className={`${styles.tabs} ${value === "1" ? styles.activateTab : ""}`}
                   label={t("panel.CreateNewPost")}
                   value="1"
                 />
-                <Tab className={styles.tabs} label="❤️" value="2" />
+                <Tab className={`${styles.tabs} ${value === "2" ? styles.activateTab : ""}`} label="❤️" value="2" />
                 <Tab
-                  className={styles.tabs}
+                  className={`${styles.tabs} ${value === "3" ? styles.activateTab : ""}`}
                   label={t("panel.allPostsLabel")}
                   value="3"
                 />
@@ -58,8 +65,18 @@ export default function Panel() {
             <TabPanel style={{ textAlign: "center" }} value="2">
               {t("panel.favorites")}
             </TabPanel>
-            <TabPanel style={{ textAlign: "center" }} value="3">
-              {t("panel.allPostsDesc")}
+            <TabPanel className={styles.postsTabContainer} value="3">
+              {isLoading ? (
+                <h1> Loading ... </h1>
+              ) : (
+                <div className={styles.postsContainer}>
+                  {posts?.map((post) => (
+                    <div className={styles.postItem} key={post.id}>
+                      <HomeArticles {...post} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </TabPanel>
           </TabContext>
         </Box>
