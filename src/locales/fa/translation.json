@@ -27,7 +27,8 @@
     "CreateNewPost": "ایجاد پست جدید",
     "allPostsLabel": "مشاهده تمام پست‌ها",
     "allPostsDesc": "تمام پست‌ها اینجا هستند",
-    "favorites": "هنوز پست مورد علاقه‌ای وجود ندارد"
+    "favorites": "هنوز پست مورد علاقه‌ای وجود ندارد",
+    "searchPosts": "جستجوی پست‌ها..."
   },
   "editPosts": {
     "editPost": "ویرایش پست",

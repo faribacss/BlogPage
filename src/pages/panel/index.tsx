@@ -1,6 +1,7 @@
 // library
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 // style
 import styles from "@/pages/panel/Panel.module.css";
@@ -21,6 +22,7 @@ import { GetAllPost } from "@/services/posts";
 // components
 import CreatePost from "@/pages/createPost";
 import HomeArticles from "@/components/homeArticles";
+import { TextField } from "@mui/material";
 
 // services
 
@@ -29,9 +31,17 @@ export default function Panel() {
   const { fontClass: langFontClass } = getLangProps(styles);
   const [value, setValue] = React.useState("1");
   const { t } = useTranslation();
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredPosts = posts?.filter(post => 
+    post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  )
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  }
 
   return (
     <>
@@ -47,13 +57,23 @@ export default function Panel() {
                 aria-label="lab API tabs example"
               >
                 <Tab
-                  className={`${styles.tabs} ${value === "1" ? styles.activateTab : ""}`}
+                  className={`${styles.tabs} ${
+                    value === "1" ? styles.activateTab : ""
+                  }`}
                   label={t("panel.CreateNewPost")}
                   value="1"
                 />
-                <Tab className={`${styles.tabs} ${value === "2" ? styles.activateTab : ""}`} label="❤️" value="2" />
                 <Tab
-                  className={`${styles.tabs} ${value === "3" ? styles.activateTab : ""}`}
+                  className={`${styles.tabs} ${
+                    value === "2" ? styles.activateTab : ""
+                  }`}
+                  label="❤️"
+                  value="2"
+                />
+                <Tab
+                  className={`${styles.tabs} ${
+                    value === "3" ? styles.activateTab : ""
+                  }`}
                   label={t("panel.allPostsLabel")}
                   value="3"
                 />
@@ -66,11 +86,20 @@ export default function Panel() {
               {t("panel.favorites")}
             </TabPanel>
             <TabPanel className={styles.postsTabContainer} value="3">
+              <div className={styles.searchBox}>
+                <TextField
+                  onChange={handleSearchChange}
+                  placeholder={t("panel.searchPosts")}
+                  type="search"
+                  variant="outlined"
+                  color="success"
+                />
+              </div>
               {isLoading ? (
                 <h1> Loading ... </h1>
               ) : (
                 <div className={styles.postsContainer}>
-                  {posts?.map((post) => (
+                  {filteredPosts?.map((post) => (
                     <div className={styles.postItem} key={post.id}>
                       <HomeArticles {...post} />
                     </div>

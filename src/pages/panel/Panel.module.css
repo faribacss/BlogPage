@@ -33,6 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .postsContainer {
   max-width: 1400px;
@@ -46,6 +47,20 @@
 .postItem {
   width: 450px;
   box-sizing: border-box;
+}
+
+.searchBox{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchBox input {
+  all: unset;
+  padding: 15px 10px;
+  width: 300px;
+  border: 1px solid #c1eca0 !important;
 }
 
 @media screen and (max-width: 720px) {

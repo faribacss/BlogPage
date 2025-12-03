@@ -27,7 +27,8 @@
     "CreateNewPost": "뉴 포스트",
     "allPostsLabel": "모든 게시물 보기",
     "allPostsDesc": "모든 게시물이 여기에 있습니다",
-    "favorites": "아직 좋아하는 게시물이 없습니다"
+    "favorites": "아직 좋아하는 게시물이 없습니다",
+    "searchPosts": "게시물 검색..."
   },
   "editPosts": {
     "editPost": "게시물 편집",

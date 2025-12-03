@@ -46,7 +46,8 @@
     "CreateNewPost": "Create New Post",
     "allPostsLabel": "See All Posts",
     "allPostsDesc": "All Posts are here",
-    "favorites": "There is no favorite post yet"
+    "favorites": "There is no favorite post yet",
+    "searchPosts": "Search posts..."
   },
   "login": {
     "title": "Welcome back!",
