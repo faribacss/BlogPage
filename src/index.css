@@ -1,0 +1,10 @@
+/* tailwind styles */
+@import "tailwindcss";
+@import "tailwindcss/utilities";
+
+
+/* fonts */
+@font-face {
+    font-family: "Popins";
+    src: url("@/assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+}
