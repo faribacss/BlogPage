@@ -88,16 +88,16 @@ export default function PostById() {
         <h1 className="text-center mb-10 font-semibold text-2xl font-serif">
           Comment your opinion
         </h1>
-        <div className="lg:px-6 sm:px-6 flex justify-center items-center lg:flex-row sm:flex-col gap-4 sm:gap-5">
+        <div className="w-full flex flex-col lg:flex-row justify-center items-center lg:items-center gap-4 sm:gap-5 p-7">
           <input
             type="text"
             placeholder="Name"
-            className="sm:w-full p-3 border border-gray-600 rounded-2xl focus:outline-none sm:text-sm"
+            className="sm:w-[260px] md:w-full lg:flex-1 p-3 border border-gray-600 rounded-2xl focus:outline-none sm:text-sm"
           />
           <input
             type="email"
             placeholder="Email"
-            className="sm:w-full p-3 border border-gray-600 rounded-2xl focus:outline-none sm:text-sm"
+            className="sm:w-[260px] md:w-full lg:flex-1 p-3 border border-gray-600 rounded-2xl focus:outline-none sm:text-sm"
           />
         </div>
         <form className="mx-auto p-6">
