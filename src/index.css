@@ -2,9 +2,12 @@
 @import "tailwindcss";
 @import "tailwindcss/utilities";
 
-
 /* fonts */
 @font-face {
     font-family: "Popins";
     src: url("@/assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+
+body {
+    background-color: #f3f4f6 !important;
 }

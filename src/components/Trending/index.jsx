@@ -32,12 +32,9 @@ export default function Trending({
           {new Date(publishedAt).toLocaleDateString()}
         </time>
       </div>
-      <div className="w-full mt-8 flex items-center gap-x-4 ">
-        <img
-          src={icon}
-          className="size-7 rounded-full bg-gray-50"
-        />
-        <div className=" gap-x-4 text-sm/6">
+      <div className="w-full mt-8 flex justify-between items-center gap-x-4">
+        <div className=" flex items-center gap-x-2 text-sm/6">
+          <img src={icon} className="size-7 rounded-full bg-gray-50" />
           <p className="font-semibold text-gray-900">
             <span className="absolute inset-0" />
             {author}
@@ -45,7 +42,7 @@ export default function Trending({
         </div>
         <Link
           to={`/postTrending/${documentId}`}
-          className="rounded-full bg-gray-700 p-2 text-gray-200 hover:text-gray-300"
+          className="rounded-full bg-gray-700 p-2 mx-4 text-gray-200 hover:text-gray-300"
         >
           See
         </Link>

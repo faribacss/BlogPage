@@ -1,18 +1,23 @@
+// library
 import { Link, useParams } from "react-router";
-import { GetPostById } from "@/services/posts";
-import icon from "@/assets/img/icon.png";
 import { Clock } from "lucide-react";
+
+// services
+import { GetPostById } from "@/services/posts";
+
+// components
+import Loading from "@/components/Loading";
+import NotFound from "@/components/NotFound";
+
+// image icon
+import icon from "@/assets/img/icon.png";
 
 export default function TrendPostById() {
   const { documentId } = useParams();
   const { data: post, isLoading } = GetPostById(documentId);
 
   if (!post) {
-    return isLoading ? (
-      <p className="text-center mx-auto text-gray-500">Loading post...</p>
-    ) : (
-      <p className="text-center mx-auto text-gray-500">Post not found.</p>
-    );
+    return isLoading ? <Loading /> : <NotFound />;
   }
 
   return (
@@ -31,12 +36,12 @@ export default function TrendPostById() {
           className="w-full lg:w-2/3 flex flex-col items-start justify-between my-12"
           style={{ maxWidth: "1000px" }}
         >
-          <div className="flex flex-wrap items-center gap-x-6 mb-8">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-5 mb-8">
             <div className="flex items-center gap-x-4">
               <img
                 alt={post.author}
                 src={icon}
-                className="size-10 rounded-full bg-gray-100 object-cover "
+                className="size-10 rounded-full bg-gray-100 object-cover mt-0"
               />
               <div className="text-sm">
                 <p className="font-extrabold text-gray-900">
@@ -47,12 +52,12 @@ export default function TrendPostById() {
               </div>
             </div>
 
-            <div className="flex items-center gap-x-1 text-xs mt-4 sm:mt-0 font-medium text-gray-600">
+            <div className="flex items-center gap-x-1 text-xs font-medium text-gray-600">
               <Clock className="w-4 h-4" />
               <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
               <a
                 href="#"
-                className="relative z-10 px-3 py-1.5 font-medium text-gray-600 hover:text-gray-500"
+                className="px-3 py-1.5 font-medium text-gray-600 hover:text-gray-500"
               >
                 Category
               </a>

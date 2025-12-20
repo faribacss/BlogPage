@@ -4,21 +4,20 @@ import { Link, useParams } from "react-router";
 
 // services
 import { GetPostById } from "@/services/posts";
+import Loading from "@/components/Loading";
+import NotFound from "@/components/NotFound";
 
 export default function RecentPostById() {
   const { documentId } = useParams();
-  const { data: post, isLoading, error } = GetPostById(documentId);
+  const { data: post, isLoading } = GetPostById(documentId);
 
   if (!post) {
     return (
       <div className="py-50 text-center">
-        {error ? (
-          <p className="text-red-500">Error loading post: {error.message}</p>
-        ) : null}
         {isLoading ? (
-          <p className="text-gray-500">Loading post...</p>
+          <Loading />
         ) : (
-          <p className="text-gray-500">Post not found.</p>
+         <NotFound />
         )}
       </div>
     );

@@ -1,9 +1,10 @@
+import Loading from "@/components/Loading";
 import RecentlyPosts from "@/components/RecentlyPosts";
 import GetAllPost from "@/services/posts";
 
 function RecentPost() {
   const { data: posts, isLoading } = GetAllPost();
-  const recentPosts = posts ? posts.slice(0, 6) : [];
+  const recentPosts = posts ? posts.slice() : [];
 
   return (
     <section className="py-12 lg:py-16 bg-gray-200">
@@ -18,7 +19,7 @@ function RecentPost() {
         </div>
 
         {isLoading ? (
-          <p className="text-center text-gray-500">Loading posts...</p>
+         <Loading />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {recentPosts.map((post) => (
