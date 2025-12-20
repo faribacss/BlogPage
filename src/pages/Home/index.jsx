@@ -1,13 +1,13 @@
 import HeroSection from "@/components/HeroSection";
-import RecentlyPosts from "@/components/RecentlyPosts";
-import Trending from "@/components/Trending";
+import RecentPost from "@/pages/RecentPost";
+import TrendPosts from "@/pages/TrendPosts";
 
 export default function Home() {
   return (
     <>
       <HeroSection />
-      <RecentlyPosts />
-      <Trending />
+      <RecentPost />
+      <TrendPosts />
     </>
   );
 }

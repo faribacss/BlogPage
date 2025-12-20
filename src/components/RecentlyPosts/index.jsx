@@ -1,71 +1,58 @@
 // library
 import { Clock, User } from "lucide-react";
-
-// data
-import { PopularNews } from "@/data";
-
-// router
 import { Link } from "react-router";
 
+// img
+import notFoundImage from "@/assets/img/notFound.png";
 
-
-export default function RecentlyPosts() {
+export default function RecentlyPosts({
+  title,
+  documentId,
+  content,
+  url,
+  publishedAt,
+  author,
+}) {
   return (
     <>
-      <article
-        className="mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
-        style={{ backgroundColor: "#DEDEDE" }}
+      <div
+        className="rounded-3xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col h-full"
+        style={{ backgroundColor: "#EFF1F3" }}
       >
-        <div className="m-auto text-center">
-          <h2 className="font-Popins text-2xl font-Poppins font-semibold mb-4">
-            Latest Posts
-          </h2>
-          <p className="font-Popins text-lg mb-12 text-gray-700">
-            Stay updated with the latest Posts and articles from our blog.
-          </p>
+        <div className="h-[250px] w-full overflow-hidden rounded-t-3xl shrink-0">
+          <img
+            src={url || notFoundImage}
+            alt={title}
+            className="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
+          />
         </div>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {PopularNews.map((news) => (
-            <div
-              className="rounded-3xl shadow-lg hover:shadow-xl transition duration-300"
-              style={{ backgroundColor: "#EFF1F3" }}
-              key={news.id}
-            >
-              <div className="h-[350px] w-full overflow-hidden rounded-t-3xl">
-                <img
-                  src={news.image}
-                  alt={news.title}
-                  className="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="font-Popins font-semibold mb-2 text-xl">
-                  {news.title}
-                </h3>
-                <p className="text-gray-500 line-clamp-3">{news.excerpt}</p>
 
-                <div className="flex items-center justify-between pt-8 text-gray-500 text-sm">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1">
-                      <User className="w-4 h-4" />
-                      <span>{news.author}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      <span>{news.readTime}</span>
-                    </div>
-                  </div>
-                  <button className="bg-gray-700 p-2 rounded-lg hover:bg-gray-600 transition-colors ease-in">
-                    <Link to={`/postId/${news.id}`} className="text-yellow-100">
-                      Take a Look
-                    </Link>
-                  </button>
-                </div>
+        <div className="p-5 flex flex-col grow">
+          <h3 className="font-Popins font-semibold mb-2 text-xl line-clamp-2">
+            {title}
+          </h3>
+          <p className="text-gray-500 line-clamp-3 mb-4 grow">{content}</p>
+
+          <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-200 text-gray-500 text-xs sm:text-sm">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+              <div className="flex items-center gap-1">
+                <User className="w-4 h-4" />
+                <span className="truncate max-w-20">{author}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Clock className="w-4 h-4" />
+                <span>{new Date(publishedAt).toLocaleDateString()}</span>
               </div>
             </div>
-          ))}
+            <Link
+              to={`/postId/${documentId}`}
+              className="bg-gray-700 text-yellow-100 p-2 rounded-lg hover:bg-gray-600 transition-colors ease-in whitespace-nowrap ml-2"
+            >
+              Take a Look
+            </Link>
+          </div>
         </div>
-      </article>
+      </div>
     </>
   );
 }

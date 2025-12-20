@@ -1,20 +1,17 @@
-import { TrendingArticle } from "@/data";
 import { Link, useParams } from "react-router";
+import { GetPostById } from "@/services/posts";
+import icon from "@/assets/img/icon.png";
+import { Clock } from "lucide-react";
 
-export default function PostIdByTrending() {
-  const { id } = useParams();
-  const postId = parseInt(id);
-
-  const post = TrendingArticle.find((p) => p.id === postId);
+export default function TrendPostById() {
+  const { documentId } = useParams();
+  const { data: post, isLoading } = GetPostById(documentId);
 
   if (!post) {
-    return (
-      <div className="py-20 text-center">
-        <h1 className="text-3xl font-bold text-red-600">Error 404</h1>
-        <p className="text-gray-700 mt-2">
-          پست مورد نظر (با شناسه {id}) پیدا نشد.
-        </p>
-      </div>
+    return isLoading ? (
+      <p className="text-center mx-auto text-gray-500">Loading post...</p>
+    ) : (
+      <p className="text-center mx-auto text-gray-500">Post not found.</p>
     );
   }
 
@@ -23,7 +20,7 @@ export default function PostIdByTrending() {
       <div className="mx-auto flex justify-center flex-wrap gap-20 px-6 lg:px-10 py-10 relative ">
         <div className="order-1 h-[400px] sm:h-[550px] xl:sticky right-0 top-40 sm:static overflow-hidden rounded-3xl mb-8">
           <img
-            src={post.trendingImg}
+            src={post.url}
             className="object-cover rounded-full w-[500px] h-[500px] mb-4"
             alt={post.title}
           />
@@ -37,32 +34,27 @@ export default function PostIdByTrending() {
           <div className="flex flex-wrap items-center gap-x-6 mb-8">
             <div className="flex items-center gap-x-4">
               <img
-                alt={post.author.name}
-                src={post.author.imageUrl}
-                className="size-12 rounded-full bg-gray-100 object-cover "
+                alt={post.author}
+                src={icon}
+                className="size-10 rounded-full bg-gray-100 object-cover "
               />
               <div className="text-sm">
-                <p className="font-semibold text-gray-900">
-                  <a href={post.author.href} className="hover:text-gray-600">
-                    {post.author.name}
+                <p className="font-extrabold text-gray-900">
+                  <a href="#" className="hover:text-gray-600">
+                    {post.author}
                   </a>
                 </p>
-                <p className="text-gray-600 text-xs mt-1">{post.author.role}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-x-3 text-xs mt-4 sm:mt-0">
-              <time
-                dateTime={post.datetime}
-                className="text-gray-600 px-3 py-1 rounded-full font-medium"
-              >
-                {post.date}
-              </time>
+            <div className="flex items-center gap-x-1 text-xs mt-4 sm:mt-0 font-medium text-gray-600">
+              <Clock className="w-4 h-4" />
+              <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
               <a
-                href={post.category.href}
+                href="#"
                 className="relative z-10 px-3 py-1.5 font-medium text-gray-600 hover:text-gray-500"
               >
-                {post.category}
+                Category
               </a>
             </div>
           </div>
@@ -72,7 +64,7 @@ export default function PostIdByTrending() {
               {post.title}
             </h3>
             <p className="mt-6 text-lg leading-7 text-gray-700">
-              {post.description}
+              {post.content}
             </p>
           </div>
           <Link

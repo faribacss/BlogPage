@@ -4,9 +4,9 @@
 import { Clock, User } from "lucide-react";
 
 // images
-import hero1 from "@/assets/img/hero1.png";
+// import hero1 from "@/assets/img/hero1.png";
 import hero2 from "@/assets/img/hero2.png";
-import hero3 from "@/assets/img/hero3.png";
+// import hero3 from "@/assets/img/hero3.png";
 
 export default function HeroSection() {
   return (
@@ -41,12 +41,9 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>2 min read</span>
+                <span>1 min read</span>
               </div>
             </div>
-            <button className="px-6 py-3 cursor-pointer bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors ease-in">
-              Create your post
-            </button>
           </div>
           <div className="order-1 lg:order-2">
             <img
