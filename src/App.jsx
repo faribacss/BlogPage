@@ -11,17 +11,22 @@ const basename = import.meta.env.BASE_URL;
 
 function App() {
   return (
-    <>
+    <div className="mainContainer">
       <BrowserRouter basename={basename}>
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/postId/:documentId" element={<RecentPostById />} />
-          <Route path="/postTrending/:documentId" element={<TrendPostById />} />
-        </Routes>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/postId/:documentId" element={<RecentPostById />} />
+            <Route
+              path="/postTrending/:documentId"
+              element={<TrendPostById />}
+            />
+          </Routes>
+        </div>
         <Footer />
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

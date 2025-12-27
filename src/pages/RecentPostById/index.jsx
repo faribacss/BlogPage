@@ -26,13 +26,6 @@ export default function RecentPostById() {
   return (
     <div>
       <div className="mx-auto flex justify-center flex-wrap px-6 lg:px-10 py-10 relative ">
-        <div className=" order-1 h-[400px] sm:h-[550px] xl:sticky right-20 top-40 sm:static overflow-hidden rounded-3xl mb-8">
-          <img
-            src={post.url}
-            alt={post.title}
-            className="h-full object-cover"
-          />
-        </div>
         <div className="max-w-4xl mx-auto">
           <p className="text-xl font-mono m-4 mx-0">Article</p>
           <h1 className="text-4xl font-Popins font-bold text-gray-900 mb-4">
@@ -71,7 +64,13 @@ export default function RecentPostById() {
               <span>Category</span>
             </div>
           </div>
-
+          <div className="flex justify-center bg-gray-100 overflow-hidden rounded-3xl mb-8">
+            <img
+              src={post.url}
+              alt={post.title}
+              className="h-full object-cover"
+            />
+          </div>
           <div className="text-lg text-gray-700 leading-relaxed">
             <h1 className="mb-4 font-semibold">{post.title}</h1>
             <p className="mb-4 text-justify">{post.content}</p>

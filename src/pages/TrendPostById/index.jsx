@@ -23,14 +23,6 @@ export default function TrendPostById() {
   return (
     <div>
       <div className="mx-auto flex justify-center flex-wrap gap-20 px-6 lg:px-10 py-10 relative ">
-        <div className="order-1 h-[400px] sm:h-[550px] xl:sticky right-0 top-40 sm:static overflow-hidden rounded-3xl mb-8">
-          <img
-            src={post.url}
-            className="object-cover rounded-full w-[500px] h-[500px] mb-4"
-            alt={post.title}
-          />
-        </div>
-
         <article
           key={post.id}
           className="w-full lg:w-2/3 flex flex-col items-start justify-between my-12"
@@ -65,7 +57,18 @@ export default function TrendPostById() {
           </div>
           <div className="text-gray-700 text-justify">
             <p className="font-mono">Trending</p>
-            <h3 className="mt-3 text-3xl font-bold tracking-tight text-gray-900">
+            <h1 className="mt-3 text-3xl font-bold tracking-tight text-gray-700">
+              {post.title}
+            </h1>
+            <div className="border-b border-gray-800 mb-10 py-2" />
+            <div className="flex justify-center bg-gray-100 overflow-hidden rounded-3xl mb-8">
+              <img
+                src={post.url}
+                className="object-cover rounded-full"
+                alt={post.title}
+              />
+            </div>
+            <h3 className="mt-3 text-xl font-bold tracking-tight text-gray-900">
               {post.title}
             </h3>
             <p className="mt-6 text-lg leading-7 text-gray-700">
